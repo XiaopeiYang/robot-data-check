@@ -5,6 +5,8 @@ Hint: ``timestamp - LAG(timestamp) OVER (PARTITION BY episode_index ORDER BY fra
 compared with ``1 / ctx.fps``. A gap of ~k/fps means k-1 dropped frames.
 Note: timestamps are float32 in DROID, so allow a tolerance (decide it from data).
 
+Set ``frame_start`` / ``frame_end`` on each Issue to the affected frames.
+
 TODO(you): implement, then add this module to ALL_CHECKS in checks/__init__.py
 and add a fault-injection test (see tests/fault_injection/test_frame_index.py).
 """

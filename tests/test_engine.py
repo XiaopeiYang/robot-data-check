@@ -50,7 +50,7 @@ def test_cli_writes_results_with_the_stable_schema(dataset_dir, tmp_path):
     table = pq.read_table(out / "results.parquet")
     assert table.schema.equals(RESULTS_SCHEMA)
     row = table.to_pylist()[0]
-    assert row["episode_index"] == 2
+    assert (row["episode_index"], row["frame_start"], row["frame_end"]) == (2, 5, 5)
     assert row["check_name"] == "frame_index"
     assert row["shard"] == "all"
     summary = (out / "summary.md").read_text()

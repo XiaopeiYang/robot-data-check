@@ -10,6 +10,9 @@ A check is a plain module-level function plus a name and a version::
 
 ``run`` may only read the views described in ``views.py`` and the context. It
 returns ``Issue``s; it never writes files or builds full result rows.
+When a problem sits at a specific place in the episode (a dropped frame, a
+spike, an idle stretch), set ``frame_start`` / ``frame_end`` on the Issue so the
+viewer can mark it on the timeline.
 Anomaly thresholds must be derived from the data itself, not hard-coded.
 """
 

@@ -22,6 +22,8 @@ RESULTS_SCHEMA = pa.schema(
         pa.field("dataset_revision", pa.string(), nullable=False),
         pa.field("shard", pa.string(), nullable=False),
         pa.field("episode_index", pa.int64(), nullable=False),
+        pa.field("frame_start", pa.int64()),
+        pa.field("frame_end", pa.int64()),
         pa.field("check_name", pa.string(), nullable=False),
         pa.field("check_version", pa.string(), nullable=False),
         pa.field("severity", pa.string(), nullable=False),
@@ -33,12 +35,19 @@ RESULTS_SCHEMA = pa.schema(
 
 @dataclass(frozen=True)
 class Issue:
-    """One problem found by a check in one episode."""
+    """One problem found by a check in one episode.
+
+    ``frame_start`` / ``frame_end`` locate the problem inside the episode as an
+    inclusive ``frame_index`` range (a single frame has start == end). Leave
+    them ``None`` for problems that concern the whole episode.
+    """
 
     episode_index: int
     severity: Severity
     value: float | None
     detail: str
+    frame_start: int | None = None
+    frame_end: int | None = None
 
 
 @dataclass(frozen=True)
@@ -63,6 +72,8 @@ def issues_to_rows(
             "dataset_revision": prov.dataset_revision,
             "shard": prov.shard,
             "episode_index": int(i.episode_index),
+            "frame_start": None if i.frame_start is None else int(i.frame_start),
+            "frame_end": None if i.frame_end is None else int(i.frame_end),
             "check_name": check_name,
             "check_version": check_version,
             "severity": i.severity,
