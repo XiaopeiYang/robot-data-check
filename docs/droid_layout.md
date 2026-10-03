@@ -38,9 +38,26 @@ Per-episode stats: `stats/<feature>/{min,max,mean,std,count,q01,q10,q50,q90,q99}
 
 Columns with `.` must be double-quoted in SQL: `"observation.state"`.
 
+## Videos
+
+- AV1, 320×180, 15 fps, 3 cameras: `wrist_left`, `exterior_1_left`, `exterior_2_left`
+- Each mp4 is ~504 MB and holds many episodes back to back; `moov` is at the front (faststart)
+- An episode's segment: `"videos/<camera>/from_timestamp"` .. `to_timestamp` in `episodes`
+  (e.g. episode 30: 577.53 s – 584.27 s = 101 frames / 15 fps)
+- The Hub serves them with HTTP range requests (`206`, `access-control-allow-origin: *`)
+
+## Findings so far (episodes 0–999)
+
+- **`date` is a copy of `collector_id`** in 1000 / 1000 episodes (e.g. both `84bd5053`):
+  the real recording date is lost in this conversion. → candidate metadata check.
+- **209 / 1000 episodes (20.9%) have an empty task** (`tasks[1] = ''`).
+  → candidate check; matters for language-conditioned policies.
+- `features.<key>.names` for `action` / `observation.state` is `{"axes": [joint_0 … joint_6, gripper]}`.
+
 ## Open questions (for you to answer with SQL)
 
 - What does the distribution of `timestamp` deltas look like? Is it exactly 1/15?
 - Are `building` / `collector_id` constant within an episode? (Useful for per-site analysis.)
+- Is the empty-task rate different across `building`s or between successful and failed episodes?
 - How do `action` (8 dims) and the decomposed `action.*` columns relate?
 - First 50 episodes: `frame_index` check finds 0 issues (14,357 frames = sum of `length`).

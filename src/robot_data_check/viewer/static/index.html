@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Episode Viewer</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uplot@1.6.31/dist/uPlot.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="title">
+      <strong>robot-data-check</strong>
+      <span id="dataset" class="muted"></span>
+    </div>
+    <div class="filters">
+      <label>Check <select id="f-check"><option value="">any</option></select></label>
+      <label>Severity
+        <select id="f-severity">
+          <option value="">any</option>
+          <option value="error">error</option>
+          <option value="warning">warning</option>
+        </select>
+      </label>
+      <label>Sort
+        <select id="f-sort">
+          <option value="worst">worst first</option>
+          <option value="index">episode index</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <aside>
+      <div id="list-count" class="muted small"></div>
+      <ol id="episode-list"></ol>
+    </aside>
+
+    <section id="detail">
+      <div id="empty" class="muted">Select an episode.</div>
+      <div id="episode" hidden>
+        <div class="ep-head">
+          <h2 id="ep-title"></h2>
+          <div id="ep-attrs" class="chips"></div>
+        </div>
+        <p id="ep-task" class="task"></p>
+
+        <div id="videos" class="videos"></div>
+
+        <div class="controls">
+          <button id="play" title="Play / pause (space)">▶</button>
+          <span id="frame-label" class="mono"></span>
+          <select id="speed" title="Playback speed">
+            <option value="0.25">0.25×</option>
+            <option value="0.5">0.5×</option>
+            <option value="1" selected>1×</option>
+            <option value="2">2×</option>
+          </select>
+          <span class="muted small keys">space play · ←/→ frame · j/k episode</span>
+        </div>
+        <div id="timeline" class="timeline" title="Click to seek"><div class="playhead"></div></div>
+
+        <h3>Issues</h3>
+        <ul id="issues" class="issues"></ul>
+
+        <div id="charts"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/uplot@1.6.31/dist/uPlot.iife.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

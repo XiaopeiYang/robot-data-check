@@ -15,11 +15,15 @@ FPS = 10
 EPISODE_LENGTHS = [40, 55, 60, 45, 50]
 DATA_FILE = "data/chunk-000/file-000.parquet"
 EPISODES_FILE = "meta/episodes/chunk-000/file-000.parquet"
+CAMERA = "observation.images.cam"
+VIDEO_FILE = f"videos/{CAMERA}/chunk-000/file-000.mp4"
 
 
 def build(root: Path) -> Path:
-    for d in ("meta/episodes/chunk-000", "data/chunk-000"):
+    for d in ("meta/episodes/chunk-000", "data/chunk-000", f"videos/{CAMERA}/chunk-000"):
         (root / d).mkdir(parents=True, exist_ok=True)
+    # Placeholder bytes, not a decodable video: enough to test serving and seeking math.
+    (root / VIDEO_FILE).write_bytes(bytes(range(256)) * 64)
 
     info = {
         "codebase_version": "v3.0",
@@ -28,7 +32,8 @@ def build(root: Path) -> Path:
         "total_episodes": len(EPISODE_LENGTHS),
         "total_frames": sum(EPISODE_LENGTHS),
         "data_path": "data/chunk-{chunk_index:03d}/file-{file_index:03d}.parquet",
-        "features": {},
+        "video_path": "videos/{video_key}/chunk-{chunk_index:03d}/file-{file_index:03d}.mp4",
+        "features": {CAMERA: {"dtype": "video", "shape": [180, 320, 3]}},
     }
     (root / "meta/info.json").write_text(json.dumps(info, indent=2))
     (root / "meta/stats.json").write_text("{}")
@@ -71,7 +76,11 @@ def build(root: Path) -> Path:
                    0::BIGINT AS "data/chunk_index",
                    0::BIGINT AS "data/file_index",
                    dataset_from_index::BIGINT AS dataset_from_index,
-                   (dataset_from_index + length)::BIGINT AS dataset_to_index
+                   (dataset_from_index + length)::BIGINT AS dataset_to_index,
+                   0::BIGINT AS "videos/{CAMERA}/chunk_index",
+                   0::BIGINT AS "videos/{CAMERA}/file_index",
+                   (dataset_from_index / {FPS})::DOUBLE AS "videos/{CAMERA}/from_timestamp",
+                   ((dataset_from_index + length) / {FPS})::DOUBLE AS "videos/{CAMERA}/to_timestamp"
             FROM eps ORDER BY episode_index
         ) TO '{root / EPISODES_FILE}' (FORMAT parquet)
         """

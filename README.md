@@ -11,9 +11,10 @@
 
 Robot learning datasets are recorded by many people, on many machines, across many sites. Small problems slip in silently: dropped frames, broken timestamps, stale normalization stats, idle segments, frozen cameras. Each one quietly degrades policy training, and most datasets are published without any systematic quality check.
 
-**robot-data-check** scans any LeRobot v3 dataset, flags problems per episode and writes every finding to a single, stable results table. Three layers sit on top of one check engine:
+**robot-data-check** scans any LeRobot v3 dataset, flags problems per episode and writes every finding to a single, stable results table. Four layers sit on top of one check engine:
 
 - **CLI** — check a dataset locally and get a Markdown report.
+- **Episode viewer** — browse episodes worst-first, with synced camera video, action / state plots and every flagged issue marked on the timeline.
 - **Pipeline** — run the same checks as stateless shard jobs, orchestrated with incremental processing, writing to object storage.
 - **Agent interface** — an MCP server that lets Claude (or any MCP client) query, diagnose and explain dataset quality in natural language, with a measured evaluation of how well it does.
 
@@ -51,6 +52,12 @@ Output:
 - `report/results.parquet` — one row per detected issue, queryable with SQL
 
 ```bash
+# Browse the results: synced video + signals + issues per episode
+uv run robocheck view lerobot/droid_1.0.1 --episodes 0-200 --results report/
+# -> http://127.0.0.1:8000/
+```
+
+```bash
 # Example: query results directly with DuckDB
 duckdb -c "SELECT check_name, count(*) FROM 'report/results.parquet' GROUP BY 1 ORDER BY 2 DESC"
 ```
@@ -79,6 +86,8 @@ flowchart LR
     B --> C
     D --> E[(results.parquet<br/>stable schema)]
     E --> F[CLI + Markdown report]
+    E --> V[Episode viewer]
+    A -.->|video streamed with<br/>HTTP range requests| V
     E --> G[MCP server]
     G --> H[AI agent<br/>Claude, etc.]
     I[Orchestrator<br/>Dagster] -->|one job per shard| Engine
@@ -96,11 +105,28 @@ Every check writes rows with the same schema. Downstream consumers (reports, age
 | `dataset_revision` | string | Dataset commit / version scanned |
 | `shard` | string | Shard the row was produced by |
 | `episode_index` | int | Episode the issue belongs to |
+| `frame_start` | int, nullable | First affected `frame_index` (null = whole episode) |
+| `frame_end` | int, nullable | Last affected `frame_index`, inclusive |
 | `check_name` | string | Which check produced the row |
 | `check_version` | string | Version of the check logic |
 | `severity` | string | `error` or `warning` |
 | `value` | double | Measured value (e.g. number of dropped frames) |
 | `detail` | string | Human-readable explanation |
+
+## Episode viewer
+
+<!-- TODO: add a screenshot / GIF -->
+
+`robocheck view` starts a local web page over the same engine and results table:
+
+- **Episode list** sorted worst-first, filterable by check and severity, with episode attributes (success, building, collector) when the dataset has them.
+- **Synced playback** of every camera plus `action` and `observation.state` plots; one video is the clock and the others follow it.
+- **Issues on the timeline**: rows with `frame_start` / `frame_end` are drawn as bands on the timeline and plots; clicking an issue jumps to its frames.
+- **Keyboard**: space play / pause, ←/→ step one frame, j/k next / previous episode.
+
+Videos are never downloaded in full. A LeRobot v3 video file holds many episodes back to back, so the browser streams it straight from the Hub with HTTP range requests and seeks to the episode's segment: watching one 101-frame DROID episode on three cameras transfers about 13 MB out of 1.5 GB of video files. Text from the dataset (task descriptions) is rendered as plain text only.
+
+The plots use `frame_index / fps` as the time axis, not the recorded `timestamp`, so a broken timestamp shows up as an issue instead of distorting the plot.
 
 ## Agent interface (MCP)
 
@@ -201,7 +227,8 @@ Each check is tested by injecting known faults into a clean synthetic dataset an
 - **Query Parquet in place with DuckDB** — no ingestion step; the same SQL works locally and on object storage.
 - **Metadata-first downloads** — videos are most of the dataset size and are skipped unless a visual check needs them.
 - **Thresholds from the data itself** — anomaly thresholds come from each dataset's own distribution, not hard-coded constants.
-- **Engine separated from interfaces** — checks live in a library with no dependency on the CLI, orchestrator, MCP or any agent framework. The results schema is the contract; everything else is replaceable.
+- **Stream video, never download it** — the viewer seeks inside the Hub's multi-episode video files with HTTP range requests, keeping the metadata-first principle even when looking at video.
+- **Engine separated from interfaces** — checks live in a library with no dependency on the CLI, viewer, orchestrator, MCP or any agent framework. The results schema is the contract; everything else is replaceable.
 - **Deterministic checks, agent for exploration** — quality checks are SQL and code: reproducible and unit-tested. The agent interprets and explores results; it never decides on its own whether data is broken.
 - **Few general tools instead of many narrow ones** — the agent gets a small set of general tools rather than pre-baked answers, so the interface does not encode today's model limitations. This choice is measured in the agent evaluation, not just assumed.
 - **Agent access restricted at the engine level, not by filtering SQL** — string-filtering SQL is fragile; a locked-down connection is not.
@@ -216,6 +243,7 @@ robot-data-check/
 ├── src/robot_data_check/
 │   ├── engine/        # loading, DuckDB views, checks, results schema
 │   ├── cli/           # robocheck CLI + Markdown report
+│   ├── viewer/        # episode viewer (FastAPI + static page, thin adapter)
 │   ├── mcp/           # MCP server (thin adapter)
 │   └── pipeline/      # Dagster assets, shard jobs, storage
 ├── tests/
@@ -231,6 +259,7 @@ robot-data-check/
 - [ ] Bounds, timestamp and frame-index checks + fault-injection tests
 - [ ] Stats and action anomaly checks, unified results and quality score
 - [ ] CLI + Markdown report
+- [x] Episode viewer: synced video, signal plots, issues on the timeline
 - [ ] Results on a DROID subset + write-up
 
 **Phase 2 — Agent interface**

@@ -25,6 +25,7 @@ import pyarrow.compute as pc
 import pyarrow.parquet as pq
 
 SUPPORTED_VERSIONS = ("v3.0",)
+HUB_URL = "https://huggingface.co"
 
 
 @dataclass(frozen=True)
@@ -61,10 +62,36 @@ class LoadedDataset:
     data_files: list[Path]
     tasks_file: Path
     stats_file: Path | None
+    local_root: Path | None = None
+    """Dataset directory for a local dataset; ``None`` for a Hub dataset."""
 
     @property
     def fps(self) -> float:
         return float(self.info["fps"])
+
+    @property
+    def video_keys(self) -> list[str]:
+        """Camera feature names, e.g. ``observation.images.wrist_left``."""
+        return [k for k, f in self.info.get("features", {}).items() if f.get("dtype") == "video"]
+
+    def video_path(self, key: str, chunk_index: int, file_index: int) -> str:
+        """Path of a video file relative to the dataset root.
+
+        One video file holds many episodes back to back; an episode's segment is
+        given by ``"videos/<key>/from_timestamp"`` / ``to_timestamp`` in ``episodes``.
+        """
+        return self.info["video_path"].format(
+            video_key=key, chunk_index=chunk_index, file_index=file_index
+        )
+
+    def remote_url(self, rel_path: str) -> str | None:
+        """Streamable URL (supports HTTP range requests) for a Hub dataset file.
+
+        Pinned to the scanned revision. ``None`` for local datasets.
+        """
+        if self.local_root is not None:
+            return None
+        return f"{HUB_URL}/datasets/{self.dataset}/resolve/{self.revision}/{rel_path}"
 
 
 def load_dataset(
@@ -100,6 +127,7 @@ def load_dataset(
         data_files=data_files,
         tasks_file=fetch("meta/tasks.parquet"),
         stats_file=fetch(stats) if stats in listing else None,
+        local_root=local if local.is_dir() else None,
     )
 
 
