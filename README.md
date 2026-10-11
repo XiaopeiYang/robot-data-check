@@ -11,7 +11,7 @@
 
 Robot learning datasets are recorded by many people, on many machines, across many sites. Small problems slip in silently: dropped frames, broken timestamps, stale normalization stats, idle segments, frozen cameras. Each one quietly degrades policy training, and most datasets are published without any systematic quality check.
 
-**robot-data-check** scans any LeRobot v3 dataset, flags problems per episode and writes every finding to a single, stable results table. Four layers sit on top of one check engine:
+**robot-data-check** scans any LeRobot v3 dataset, flags problems per episode and writes every finding to a single, stable results table. Problems come from three places, and the checks are grouped accordingly: **conversion** from other formats (mis-mapped metadata, label consistency), **recording** (dropped frames, timing jitter) and **behaviour** in the demonstration itself (idle stretches, action jumps). See [docs/vision.md](docs/vision.md). Four layers sit on top of one check engine:
 
 - **CLI** — check a dataset locally and get a Markdown report.
 - **Episode viewer** — browse episodes worst-first, with synced camera video, action / state plots and every flagged issue marked on the timeline.
@@ -28,6 +28,7 @@ Robot learning datasets are recorded by many people, on many machines, across ma
 | `stats` | `stats.json` inconsistent with the actual data | Recompute mean / std / min / max | warning |
 | `action_jumps` | Sudden spikes between consecutive actions | Thresholds from the dataset's own distribution | warning |
 | `idle_segments` | Robot not moving for long stretches | Rolling-window state change | warning |
+| `metadata` *(planned)* | Duplicated / mis-mapped metadata columns, empty or constant fields, very short episodes | Column comparisons across episodes | warning |
 
 Each episode also gets a quality score aggregated from its issues. <!-- TODO: document the scoring formula once fixed -->
 
@@ -254,31 +255,42 @@ robot-data-check/
 
 ## Roadmap
 
-**Phase 1 — Core engine**
+Full version with completion criteria and risks: [docs/vision.md](docs/vision.md).
+
+**Done**
 - [x] Load dataset, DuckDB views, schema inspection
-- [ ] Bounds, timestamp and frame-index checks + fault-injection tests
-- [ ] Stats and action anomaly checks, unified results and quality score
-- [ ] CLI + Markdown report
+- [x] `frame_index` check + fault-injection test harness
+- [x] CLI + Markdown report
 - [x] Episode viewer: synced video, signal plots, issues on the timeline
-- [ ] Results on a DROID subset + write-up
 
-**Phase 2 — Agent interface**
-- [ ] MCP server (read-only sandboxed connection, paginated results)
-- [ ] Agent eval set with ground-truth answers
-- [ ] Tool design comparison + demo GIF
+**Now**
+- [ ] GitHub remote, CI running, browser end-to-end test in the repo
 
-**Phase 3 — Pipeline at scale**
-- [ ] Stateless, idempotent shard jobs writing to object storage
-- [ ] Dagster orchestration with incremental processing
-- [ ] Full-scale run with time and cost numbers
+**M1 wrap-up — checks with real findings**
+- [ ] `episode_bounds` → `metadata` → `idle_segments` → `action_jumps` → `stats`
+- [ ] Add one dataset recorded directly with LeRobot (SO-100/101) for the timing checks
+- [ ] Verify DROID findings against the original RLDS data ([findings](docs/findings/droid_1.0.1.md))
+- [ ] Results on DROID + write-up, quality score
+
+**Outreach**
+- [ ] Upstream issue for confirmed defects; first blog post
+
+**Phase 2 — scan the Hub**
+- [ ] Inclusion criteria (valid metadata, minimum size, no test uploads), reported with exclusion counts
+- [ ] Incremental, idempotent scans keyed by dataset commit sha; Dagster; cloud
+
+**Phase 3 — agent interface**
+- [ ] MCP server over results from all scanned datasets
+- [ ] Agent eval set with ground-truth answers; tool design comparison
 
 **Later**
-- [ ] Visual checks (frozen / black frames)
-- [ ] Instruction ↔ video consistency
+- [ ] Visual checks (frozen / black frames), instruction ↔ video consistency
 
 ## Limitations
 
-- Only LeRobot v3 datasets are supported.
+- Only LeRobot `v3.0` datasets are supported. In a random sample of 60 Hub datasets tagged `LeRobot` (59 readable), 46 were `v3.0`: about 78% (95% CI ≈ 66–87%); the rest were `v2.1`.
+- Timing checks need real recording timestamps; datasets converted from other formats (e.g. DROID) often have synthesised ones.
+- The viewer streams AV1 video (LeRobot's default); Safari plays AV1 only on recent hardware.
 - Anomaly thresholds are derived per dataset but have so far been validated on a small number of datasets.
 - Visual checks are not yet implemented; problems that only show up in video (frozen or black frames) are not detected.
 - A flagged issue is not always a real problem: some "idle segments" or "action jumps" may be intentional behaviour. Results are signals for review, not automatic verdicts.

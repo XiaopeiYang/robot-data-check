@@ -46,18 +46,13 @@ Columns with `.` must be double-quoted in SQL: `"observation.state"`.
   (e.g. episode 30: 577.53 s – 584.27 s = 101 frames / 15 fps)
 - The Hub serves them with HTTP range requests (`206`, `access-control-allow-origin: *`)
 
-## Findings so far (episodes 0–999)
+## Findings
 
-- **`date` is a copy of `collector_id`** in 1000 / 1000 episodes (e.g. both `84bd5053`):
-  the real recording date is lost in this conversion. → candidate metadata check.
-- **209 / 1000 episodes (20.9%) have an empty task** (`tasks[1] = ''`).
-  → candidate check; matters for language-conditioned policies.
-- `features.<key>.names` for `action` / `observation.state` is `{"axes": [joint_0 … joint_6, gripper]}`.
+See [findings/droid_1.0.1.md](findings/droid_1.0.1.md) (each finding with query, evidence and status).
 
 ## Open questions (for you to answer with SQL)
 
 - What does the distribution of `timestamp` deltas look like? Is it exactly 1/15?
 - Are `building` / `collector_id` constant within an episode? (Useful for per-site analysis.)
-- Is the empty-task rate different across `building`s or between successful and failed episodes?
+- Is the empty-task rate different across `building`s? (Success vs failure: answered in the findings log.)
 - How do `action` (8 dims) and the decomposed `action.*` columns relate?
-- First 50 episodes: `frame_index` check finds 0 issues (14,357 frames = sum of `length`).
