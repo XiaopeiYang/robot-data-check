@@ -6,8 +6,8 @@ Hint: recompute mean / std / min / max of ``action`` and ``"observation.state"``
 (list columns: ``UNNEST`` with an ordinal, or ``list_extract``) and compare.
 Per-episode stats also live in ``episodes`` as ``"stats/<feature>/<stat>"`` columns.
 
-TODO(you): implement, then add this module to ALL_CHECKS in checks/__init__.py
-and add a fault-injection test (see tests/fault_injection/test_frame_index.py).
+TODO: the user writes docs/specs/stats.md first; tests and implementation then
+follow the check-workflow skill (.claude/skills/check-workflow/SKILL.md).
 """
 
 from __future__ import annotations

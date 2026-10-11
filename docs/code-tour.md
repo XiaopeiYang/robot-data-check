@@ -51,6 +51,19 @@
 - 曲线的横轴是 `frame_index / fps`，不是录制的 `timestamp`：坏时间戳正是要检查的东西，不能让它扭曲曲线
 - 所有数据集文本都用 `textContent` 插入，防止 XSS
 
+## 10. 检查的开发流程和变异测试
+- 流程（详见 `.claude/skills/check-workflow/SKILL.md`）：
+  1. 你写 `docs/specs/<check>.md`
+  2. 测试 agent 只看 spec，先写测试（此时检查还是桩，测试必须先失败）
+  3. 实现 agent 写代码，测试对它只读，用哈希校验
+  4. 有分歧由你裁决，记进 spec 的 Decisions
+  5. 跑变异测试
+  6. 出阅读指南和讲回来的题
+- `tools/mutate_sql.py`：每次只改 SQL 的一处（`<` 改成 `<=`、`AND` 改成 `OR`、去掉 `+ 1`、`min` 和 `max` 互换、删掉一个 WHERE 条件……），然后重跑这个检查的测试。改了测试还是通过，就说明测试有漏洞
+- 为什么不用 mutmut：检查逻辑都在 SQL 字符串里，mutmut 只改 Python 运算符，碰不到 SQL
+- 第一次运行的结果：`frame_index` 杀死 14/16，存活的 2 个都是重复帧范围的 `min` 和 `max` 互换。原因是测试只重复了一帧，起止相同。这是一个真实的测试缺口
+- **练习**：为什么一个变异体"让 SQL 报错"不算测试强？工具是怎么区分这种情况的？
+
 ## 面试最可能被追问的 5 个问题
 1. 为什么用 DuckDB，而不是 pandas 或 Spark？（第 3、4 节；README 的 Design decisions）
 2. 怎么证明你的检查是对的？（第 6 节：故障注入、检出率和误报率）

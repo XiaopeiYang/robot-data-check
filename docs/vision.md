@@ -40,7 +40,7 @@ value on a directly recorded dataset.
 | Stage | Content | Done when |
 |---|---|---|
 | **Now** | GitHub remote, CI running, browser end-to-end test script in the repo | CI is green |
-| **M1 wrap-up** | User writes the checks, in order: `episode_bounds` → `metadata` (duplicated columns, empty / constant fields, very short episodes) → `idle_segments` → `action_jumps` → `stats`. Add one SO-100/101 dataset. Verify DROID findings against the original RLDS data. | README Results and Key finding filled with real numbers |
+| **M1 wrap-up** | User writes a spec per check, agents build it ([check-workflow](../.claude/skills/check-workflow/SKILL.md)), in order: `episode_bounds` → `metadata` (duplicated columns, empty / constant fields, very short episodes) → `idle_segments` → `action_jumps` → `stats`. Add one SO-100/101 dataset. Verify DROID findings against the original RLDS data. | README Results and Key finding filled with real numbers |
 | **Outreach** | Upstream issue for confirmed defects; first technical blog post | A public issue link |
 | **Phase 2: scan the Hub** | Define inclusion criteria first; then incremental, idempotent scans keyed by dataset commit sha; Dagster orchestration; cloud | Can say "scanned N datasets (after filtering M), found these categories of problems" |
 | **Phase 3: agent interface** | MCP server + agent eval, querying results across all scanned datasets | Agent eval has real accuracy numbers |
@@ -70,7 +70,7 @@ Every scan report states how many datasets were excluded and why.
 
 | Risk | Mitigation |
 |---|---|
-| **Code ownership**: core checks not written by the user | User writes all checks; Claude only reviews ([CLAUDE.md](../CLAUDE.md)); [code-tour.md](code-tour.md) for existing code |
+| **Code ownership**: checks implemented by agents | The user writes each spec, rules on every test/implementation disagreement and answers explain-back questions; tests and implementation come from isolated agents, checked by SQL mutation testing ([CLAUDE.md](../CLAUDE.md), [code-tour.md](code-tour.md)) |
 | Overclaiming a finding | `verify-finding` skill; four statuses; source data checked before upstream issues |
 | `v2.1` datasets (≈22% of the sample) unsupported | Phase 2 either adds `v2.1` support or reports "v3 only" explicitly |
 | Hub rate limits | `HF_TOKEN` for scans; metadata-first downloads keep requests small |

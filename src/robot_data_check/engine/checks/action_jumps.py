@@ -7,8 +7,8 @@ never a hard-coded constant.
 
 Set ``frame_start`` / ``frame_end`` on each Issue to the affected frames.
 
-TODO(you): implement, then add this module to ALL_CHECKS in checks/__init__.py
-and add a fault-injection test (see tests/fault_injection/test_frame_index.py).
+TODO: the user writes docs/specs/action_jumps.md first; tests and implementation then
+follow the check-workflow skill (.claude/skills/check-workflow/SKILL.md).
 """
 
 from __future__ import annotations
