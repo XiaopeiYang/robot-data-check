@@ -5,8 +5,8 @@ Hint: join ``episodes`` (length, dataset_from_index, dataset_to_index) with a
 per-episode ``count(*)`` from ``frames``. Also worth checking that the global
 ``index`` column of each episode spans exactly [dataset_from_index, dataset_to_index).
 
-TODO: the user writes docs/specs/episode_bounds.md first; tests and implementation then
-follow the check-workflow skill (.claude/skills/check-workflow/SKILL.md).
+TODO: written by hand by the user (code + fault-injection test), then reviewed with
+the review-check skill. Start from checks/frame_index.py and its test.
 """
 
 from __future__ import annotations

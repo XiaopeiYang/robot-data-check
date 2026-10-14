@@ -5,21 +5,24 @@ description: Review a quality check (src/robot_data_check/engine/checks/*.py and
 
 # Review a check and guide the user through it
 
-Checks are written by subagents against the user's spec (`check-workflow`). The review
-has two goals: the check is correct, and the **user** can explain and defend it without
-notes. The second goal is what makes this the user's project.
+Most checks are written by subagents against the user's spec (`check-workflow`);
+`episode_bounds` is written by hand by the user. The review has two goals: the check is
+correct, and the **user** can explain and defend it without notes.
 
 ## Ground rules
 
-- Do not edit the check or its tests. Problems go back through `check-workflow`
-  (implementation agent for code, test agent for tests, user for spec questions).
+- Do not edit the check or its tests.
+  - Hand-written check: point at the line, explain the problem, ask a question that
+    leads to the fix; give a code snippet only if the user explicitly asks.
+  - Agent-written check: problems go back through `check-workflow` (implementation
+    agent for code, test agent for tests, user for spec questions).
 - Support claims with evidence: run `uv run pytest`, run queries on the synthetic dataset
   or DROID, show the failing case.
 - Separate **must fix** (wrong results, broken contract) from **suggestions**.
 
 ## Checklist
 
-**Matches the spec**
+**Matches the spec** (hand-written checks without a spec: matches the docstring)
 - [ ] Every rule R1..Rn in `docs/specs/<check>.md` is implemented, and nothing else
 - [ ] Every Decision in the spec is reflected in code and tests
 

@@ -11,6 +11,8 @@ Code walkthrough: [docs/code-tour.md](docs/code-tour.md). Findings: [docs/findin
    implementation; the implementation agent must not modify tests. Disagreements go to the
    user, whose rulings are recorded in the spec's Decisions section. SQL mutation testing
    runs before merge. Never write or fill in a spec for the user.
+   **Exception: `episode_bounds` is written by hand by the user** (code and tests);
+   Claude only reviews it with `review-check` and does not write any of it.
 2. **No unverified findings.** Nothing is called a data defect (in chat, docs, README or an
    upstream issue) before it went through the `verify-finding` skill and is logged in
    `docs/findings/` with a status.
