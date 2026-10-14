@@ -52,6 +52,7 @@ function renderList() {
   ol.replaceChildren();
   const withIssues = state.list.filter((e) => e.errors + e.warnings > 0).length;
   $("list-count").textContent = `${state.list.length} episodes · ${withIssues} with issues`;
+  ol.append(datasetItem());
   for (const e of state.list) {
     const counts = el("span", { class: "counts" });
     if (e.errors) counts.append(el("span", { class: "badge error", text: `${e.errors} E` }));
@@ -68,6 +69,23 @@ function renderList() {
   }
 }
 
+// Dataset-level issues (episode_index = -1) belong to no episode: one fixed entry on top.
+function datasetItem() {
+  const { errors, warnings } = state.meta.dataset_issues;
+  const counts = el("span", { class: "counts" });
+  if (errors) counts.append(el("span", { class: "badge error", text: `${errors} E` }));
+  if (warnings) counts.append(el("span", { class: "badge warning", text: `${warnings} W` }));
+  if (!errors && !warnings) counts.append(el("span", { class: "badge ok", text: "ok" }));
+  const li = el(
+    "li",
+    { "data-ep": "dataset", onclick: openDataset },
+    el("div", { class: "row1" }, el("strong", { text: "Dataset" }), counts),
+    el("div", { class: "li-task", text: "issues about the whole dataset" }),
+  );
+  if (state.view === "dataset") li.classList.add("active");
+  return li;
+}
+
 function step(delta) {
   if (!state.list.length) return;
   const i = state.list.findIndex((e) => state.ep && e.episode_index === state.ep.episode_index);
@@ -77,6 +95,33 @@ function step(delta) {
 
 // ---------- episode detail ----------
 
+function setMediaVisible(visible) {
+  for (const id of ["ep-task", "videos", "controls", "timeline", "charts"]) $(id).hidden = !visible;
+}
+
+function markActive(key) {
+  for (const li of $("episode-list").children) {
+    const on = li.dataset.ep === String(key);
+    li.classList.toggle("active", on);
+    if (on) li.scrollIntoView({ block: "nearest" });
+  }
+}
+
+async function openDataset() {
+  pause();
+  const { issues } = await api("/api/dataset");
+  state.ep = null;
+  state.view = "dataset";
+  history.replaceState(null, "", "#dataset");
+  $("empty").hidden = true;
+  $("episode").hidden = false;
+  $("ep-title").textContent = "Dataset-level issues";
+  $("ep-attrs").replaceChildren(el("span", { class: "chip", text: state.meta.dataset }));
+  setMediaVisible(false);
+  renderIssues(issues, "whole dataset");
+  markActive("dataset");
+}
+
 async function openEpisode(idx) {
   pause();
   const [ep, series] = await Promise.all([
@@ -84,6 +129,7 @@ async function openEpisode(idx) {
     api(`/api/episodes/${idx}/series`),
   ]);
   state.ep = ep;
+  state.view = "episode";
   state.duration = ep.length / state.meta.fps;
   history.replaceState(null, "", `#ep=${idx}`);
 
@@ -98,10 +144,8 @@ async function openEpisode(idx) {
     if (ep[a] != null) chips.append(el("span", { class: "chip", text: `${a}: ${ep[a]}` }));
   }
 
-  for (const li of $("episode-list").children) {
-    li.classList.toggle("active", Number(li.dataset.ep) === idx);
-    if (Number(li.dataset.ep) === idx) li.scrollIntoView({ block: "nearest" });
-  }
+  markActive(idx);
+  setMediaVisible(true);
 
   renderVideos(ep.videos);
   renderTimeline(ep);
@@ -154,16 +198,16 @@ function renderTimeline(ep) {
   }
 }
 
-function renderIssues(issues) {
+function renderIssues(issues, unlocated = "whole episode") {
   const ul = $("issues");
   ul.replaceChildren();
   if (!issues.length) {
-    ul.append(el("li", { class: "none", text: "No issues found in this episode." }));
+    ul.append(el("li", { class: "none", text: `No issues found (${unlocated}).` }));
     return;
   }
   for (const iss of issues) {
     const where = iss.frame_start == null
-      ? "whole episode"
+      ? unlocated
       : iss.frame_start === iss.frame_end
         ? `frame ${iss.frame_start}`
         : `frames ${iss.frame_start}–${iss.frame_end}`;
@@ -325,13 +369,14 @@ $("timeline").addEventListener("click", (e) => {
 for (const id of ["f-check", "f-severity", "f-sort"]) $(id).addEventListener("change", loadList);
 
 document.addEventListener("keydown", (e) => {
-  if (e.target.tagName === "SELECT" || !state.ep) return;
+  if (e.target.tagName === "SELECT") return;
+  if (e.key === "j") return step(1);
+  if (e.key === "k") return step(-1);
+  if (!state.ep) return;
   const dt = 1 / state.meta.fps;
   if (e.key === " ") { e.preventDefault(); state.playing ? pause() : play(); }
   else if (e.key === "ArrowRight") { e.preventDefault(); pause(); seek(state.t + dt); }
   else if (e.key === "ArrowLeft") { e.preventDefault(); pause(); seek(state.t - dt); }
-  else if (e.key === "j") step(1);
-  else if (e.key === "k") step(-1);
 });
 
 (async function init() {
@@ -339,6 +384,7 @@ document.addEventListener("keydown", (e) => {
   $("dataset").textContent = `${state.meta.dataset} @ ${String(state.meta.revision).slice(0, 8)}`;
   for (const c of state.meta.checks) $("f-check").append(el("option", { value: c, text: c }));
   await loadList();
+  if (location.hash === "#dataset") return openDataset();
   const m = location.hash.match(/ep=(\d+)/);
   const first = m ? Number(m[1]) : state.list[0]?.episode_index;
   if (first != null) openEpisode(first);

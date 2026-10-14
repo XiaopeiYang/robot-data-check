@@ -16,7 +16,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from ..engine.loader import LoadedDataset
-from ..engine.results import RESULTS_SCHEMA
+from ..engine.results import DATASET_LEVEL, RESULTS_SCHEMA
 from ..engine.views import connect
 
 STATIC_DIR = Path(__file__).parent / "static"
@@ -82,6 +82,12 @@ def create_app(ds: LoadedDataset, results: pa.Table | None = None) -> FastAPI:
             "fps": ds.fps,
             "cameras": cameras,
             "checks": checks,
+            "dataset_issues": q(
+                "SELECT count(*) FILTER (severity = 'error') AS errors, "
+                "count(*) FILTER (severity = 'warning') AS warnings "
+                "FROM results WHERE episode_index = ?",
+                [DATASET_LEVEL],
+            )[0],
             "attrs": attrs,
             "series": {k: ds.info.get("features", {}).get(k, {}).get("names") for k in series_keys},
         }
@@ -108,6 +114,19 @@ def create_app(ds: LoadedDataset, results: pa.Table | None = None) -> FastAPI:
             f"ORDER BY {order}",
             params,
         )
+
+    @app.get("/api/dataset")
+    def dataset_issues() -> dict:
+        """Issues about the whole dataset (episode_index = DATASET_LEVEL)."""
+        issues = q(
+            """
+            SELECT check_name, check_version, severity, value, detail, frame_start, frame_end
+            FROM results WHERE episode_index = ?
+            ORDER BY severity, check_name
+            """,
+            [DATASET_LEVEL],
+        )
+        return {"issues": issues}
 
     @app.get("/api/episodes/{episode_index}")
     def episode(episode_index: int) -> dict:

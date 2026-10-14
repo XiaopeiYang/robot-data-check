@@ -105,7 +105,7 @@ Every check writes rows with the same schema. Downstream consumers (reports, age
 | `dataset` | string | Hub repo id |
 | `dataset_revision` | string | Dataset commit / version scanned |
 | `shard` | string | Shard the row was produced by |
-| `episode_index` | int | Episode the issue belongs to |
+| `episode_index` | int | Episode the issue belongs to; `-1` for dataset-level issues (shown separately in reports and the viewer) |
 | `frame_start` | int, nullable | First affected `frame_index` (null = whole episode) |
 | `frame_end` | int, nullable | Last affected `frame_index`, inclusive |
 | `check_name` | string | Which check produced the row |

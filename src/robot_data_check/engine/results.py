@@ -16,6 +16,11 @@ import pyarrow.parquet as pq
 
 Severity = Literal["error", "warning"]
 
+DATASET_LEVEL = -1
+"""``episode_index`` of issues that concern the whole dataset rather than one episode
+(e.g. two metadata columns that are identical everywhere, stale ``stats.json``).
+Reports and the viewer show these separately and never count them as an episode."""
+
 RESULTS_SCHEMA = pa.schema(
     [
         pa.field("dataset", pa.string(), nullable=False),

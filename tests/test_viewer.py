@@ -4,6 +4,7 @@ from fastapi.testclient import TestClient
 from robot_data_check.engine.checks import ALL_CHECKS
 from robot_data_check.engine.loader import load_dataset
 from robot_data_check.engine.registry import CheckContext, run_checks
+from robot_data_check.engine.results import DATASET_LEVEL, to_table
 from robot_data_check.engine.views import connect
 from robot_data_check.viewer.server import create_app
 from tests.fault_injection.faults import delete_frames
@@ -72,3 +73,38 @@ def test_static_page_is_served(client):
     r = client.get("/")
     assert r.status_code == 200
     assert "Episode Viewer" in r.text
+
+
+@pytest.fixture
+def client_with_dataset_issue(dataset_dir):
+    ds = load_dataset(str(dataset_dir))
+    ctx = CheckContext(dataset="synthetic", revision=ds.revision, fps=ds.fps, info=ds.info)
+    rows = run_checks(connect(ds), ctx, ALL_CHECKS, shard="all").to_pylist()
+    rows.append({**DATASET_ROW, "dataset_revision": ds.revision})
+    return TestClient(create_app(ds, to_table(rows)))
+
+
+DATASET_ROW = {
+    "dataset": "synthetic",
+    "shard": "all",
+    "episode_index": DATASET_LEVEL,
+    "frame_start": None,
+    "frame_end": None,
+    "check_name": "metadata",
+    "check_version": "1",
+    "severity": "warning",
+    "value": 1.0,
+    "detail": "columns a and b are identical in every episode",
+}
+
+
+def test_dataset_level_issues_have_their_own_endpoint_and_stay_out_of_the_episode_list(
+    client_with_dataset_issue,
+):
+    c = client_with_dataset_issue
+    assert c.get("/api/meta").json()["dataset_issues"] == {"errors": 0, "warnings": 1}
+    [issue] = c.get("/api/dataset").json()["issues"]
+    assert issue["check_name"] == "metadata" and issue["frame_start"] is None
+    eps = c.get("/api/episodes").json()
+    assert DATASET_LEVEL not in [e["episode_index"] for e in eps]
+    assert all(e["warnings"] == 0 for e in eps)

@@ -56,3 +56,46 @@ def test_cli_writes_results_with_the_stable_schema(dataset_dir, tmp_path):
     summary = (out / "summary.md").read_text()
     assert "Episodes scanned: 5" in summary
     assert "Episodes with ≥1 error: 1" in summary
+
+
+def test_report_lists_dataset_level_issues_separately():
+    from robot_data_check.cli.report import render_summary
+    from robot_data_check.engine.results import DATASET_LEVEL, to_table
+
+    base = {
+        "dataset": "d",
+        "dataset_revision": "r",
+        "shard": "all",
+        "frame_start": None,
+        "frame_end": None,
+        "check_version": "1",
+        "value": 1.0,
+    }
+    rows = [
+        {
+            **base,
+            "episode_index": 3,
+            "check_name": "frame_index",
+            "severity": "error",
+            "detail": "1 frame_index value(s) missing",
+        },
+        {
+            **base,
+            "episode_index": DATASET_LEVEL,
+            "check_name": "metadata",
+            "severity": "error",
+            "detail": "date | collector_id identical",
+        },
+    ]
+    md = render_summary(
+        to_table(rows),
+        dataset="d",
+        revision="r",
+        episodes_scanned=5,
+        checks=["frame_index", "metadata"],
+    )
+    assert "Episodes with ≥1 error: 1" in md  # the dataset-level row is not an episode
+    assert "## Dataset-level issues" in md
+    assert "date \\| collector_id identical" in md  # pipes escaped in the table
+    assert "| -1 |" not in md
+    assert "| metadata | 1 | 0 | 0 |" in md  # counted per check, but affects 0 episodes
