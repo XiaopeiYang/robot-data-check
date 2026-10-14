@@ -147,7 +147,8 @@ h3 { margin: 20px 0 8px; font-size: 15px; }
 .issues { list-style: none; margin: 0; padding: 0; }
 .issues li {
   display: grid;
-  grid-template-columns: 70px 130px 110px 1fr;
+  grid-template-columns: 70px 130px 110px 1fr auto;
+  align-items: center;
   gap: 8px;
   padding: 5px 8px;
   border-bottom: 1px solid var(--border);
@@ -155,6 +156,10 @@ h3 { margin: 20px 0 8px; font-size: 15px; }
 .issues li.seekable { cursor: pointer; }
 .issues li.seekable:hover { background: var(--hover); }
 .issues .none { display: block; color: var(--muted); }
+.labels { display: flex; gap: 4px; }
+.label-btn { font-size: 12px; padding: 1px 6px; color: var(--muted); }
+.label-btn.on[data-label="real"] { color: var(--error); border-color: var(--error); }
+.label-btn.on[data-label="false_positive"] { color: var(--ok); border-color: var(--ok); }
 
 .chart { margin-top: 16px; position: relative; }
 .chart .playhead { top: 0; bottom: 0; }

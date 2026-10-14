@@ -14,10 +14,12 @@ import pyarrow as pa
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 
 from ..engine.loader import LoadedDataset
 from ..engine.results import DATASET_LEVEL, RESULTS_SCHEMA
 from ..engine.views import connect
+from .labels import Label, LabelStore
 
 STATIC_DIR = Path(__file__).parent / "static"
 
@@ -26,8 +28,20 @@ EPISODE_ATTRS = ["is_episode_successful", "building", "collector_id", "date"]
 SERIES_KEYS = ["action", "observation.state"]
 
 
-def create_app(ds: LoadedDataset, results: pa.Table | None = None) -> FastAPI:
+class LabelIn(BaseModel):
+    episode_index: int
+    check_name: str
+    frame_start: int | None = None
+    frame_end: int | None = None
+    label: Label
+
+
+def create_app(
+    ds: LoadedDataset, results: pa.Table | None = None, labels_path: Path | None = None
+) -> FastAPI:
+    """``labels_path``: JSON-lines file for review labels; ``None`` disables labelling."""
     con = connect(ds)
+    labels = LabelStore(labels_path, ds.dataset, ds.revision) if labels_path else None
     # Copy into a real table: registered Arrow views are not visible to the
     # per-request cursors below.
     con.register("results_arrow", results if results is not None else RESULTS_SCHEMA.empty_table())
@@ -70,6 +84,13 @@ def create_app(ds: LoadedDataset, results: pa.Table | None = None) -> FastAPI:
         names = [d[0] for d in rel.description]
         return [dict(zip(names, row, strict=True)) for row in rel.fetchall()]
 
+    def with_labels(episode_index: int, issues: list[dict]) -> list[dict]:
+        latest = labels.latest() if labels else {}
+        for i in issues:
+            key = (episode_index, i["check_name"], i["frame_start"], i["frame_end"])
+            i["label"] = latest.get(key)
+        return issues
+
     def video_url(rel: str) -> str:
         return ds.remote_url(rel) or f"/videos/{rel}"
 
@@ -82,6 +103,7 @@ def create_app(ds: LoadedDataset, results: pa.Table | None = None) -> FastAPI:
             "fps": ds.fps,
             "cameras": cameras,
             "checks": checks,
+            "labels_enabled": labels is not None,
             "dataset_issues": q(
                 "SELECT count(*) FILTER (severity = 'error') AS errors, "
                 "count(*) FILTER (severity = 'warning') AS warnings "
@@ -126,7 +148,7 @@ def create_app(ds: LoadedDataset, results: pa.Table | None = None) -> FastAPI:
             """,
             [DATASET_LEVEL],
         )
-        return {"issues": issues}
+        return {"issues": with_labels(DATASET_LEVEL, issues)}
 
     @app.get("/api/episodes/{episode_index}")
     def episode(episode_index: int) -> dict:
@@ -154,7 +176,15 @@ def create_app(ds: LoadedDataset, results: pa.Table | None = None) -> FastAPI:
             videos.append(
                 {"camera": cam, "url": video_url(rel), "from_ts": seg["t0"], "to_ts": seg["t1"]}
             )
-        return {**rows[0], "issues": issues, "videos": videos}
+        return {**rows[0], "issues": with_labels(episode_index, issues), "videos": videos}
+
+    @app.post("/api/labels")
+    def add_label(body: LabelIn) -> dict:
+        if labels is None:
+            raise HTTPException(409, "labelling is disabled (no results directory)")
+        return labels.add(
+            body.episode_index, body.check_name, body.frame_start, body.frame_end, body.label
+        )
 
     @app.get("/api/episodes/{episode_index}/series")
     def series(episode_index: int) -> dict:

@@ -98,4 +98,6 @@ def view(
         typer.echo(f"warning: {path} not found, showing episodes without check results")
 
     typer.echo(f"Episode viewer: http://{host}:{port}/")
-    uvicorn.run(create_app(ds, table), host=host, port=port, log_level="warning")
+    typer.echo(f"Review labels are saved to {results / 'labels.jsonl'}")
+    app_ = create_app(ds, table, labels_path=results / "labels.jsonl")
+    uvicorn.run(app_, host=host, port=port, log_level="warning")

@@ -118,7 +118,7 @@ async function openDataset() {
   $("ep-title").textContent = "Dataset-level issues";
   $("ep-attrs").replaceChildren(el("span", { class: "chip", text: state.meta.dataset }));
   setMediaVisible(false);
-  renderIssues(issues, "whole dataset");
+  renderIssues(issues, -1, "whole dataset");
   markActive("dataset");
 }
 
@@ -149,7 +149,7 @@ async function openEpisode(idx) {
 
   renderVideos(ep.videos);
   renderTimeline(ep);
-  renderIssues(ep.issues);
+  renderIssues(ep.issues, ep.episode_index);
   renderCharts(series, ep.issues);
   seek(0);
 }
@@ -198,7 +198,42 @@ function renderTimeline(ep) {
   }
 }
 
-function renderIssues(issues, unlocated = "whole episode") {
+// Review labels: is a flagged issue a real problem or a false positive?
+const LABELS = [["real", "✓ real"], ["false_positive", "✗ false positive"]];
+
+function labelButtons(iss, episodeIndex) {
+  const box = el("span", { class: "labels" });
+  const paint = () => {
+    for (const b of box.children) b.classList.toggle("on", b.dataset.label === iss.label);
+  };
+  for (const [value, text] of LABELS) {
+    box.append(el("button", {
+      class: "label-btn",
+      "data-label": value,
+      title: "Saved to labels.jsonl next to the results",
+      text,
+      onclick: async (e) => {
+        e.stopPropagation(); // the row itself seeks to the issue
+        const r = await fetch("/api/labels", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            episode_index: episodeIndex,
+            check_name: iss.check_name,
+            frame_start: iss.frame_start,
+            frame_end: iss.frame_end,
+            label: value,
+          }),
+        });
+        if (r.ok) { iss.label = value; paint(); }
+      },
+    }));
+  }
+  paint();
+  return box;
+}
+
+function renderIssues(issues, episodeIndex, unlocated = "whole episode") {
   const ul = $("issues");
   ul.replaceChildren();
   if (!issues.length) {
@@ -218,6 +253,7 @@ function renderIssues(issues, unlocated = "whole episode") {
       el("span", { class: "mono", text: iss.check_name }),
       el("span", { class: "muted", text: where }),
       el("span", { text: iss.detail ?? "" }),
+      state.meta.labels_enabled ? labelButtons(iss, episodeIndex) : el("span"),
     );
     if (iss.frame_start != null) {
       li.classList.add("seekable");

@@ -1,3 +1,5 @@
+import json
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -108,3 +110,46 @@ def test_dataset_level_issues_have_their_own_endpoint_and_stay_out_of_the_episod
     eps = c.get("/api/episodes").json()
     assert DATASET_LEVEL not in [e["episode_index"] for e in eps]
     assert all(e["warnings"] == 0 for e in eps)
+
+
+@pytest.fixture
+def labelling(dataset_dir, tmp_path):
+    delete_frames(dataset_dir, episode=3, frame_indices=[20, 21])
+    ds = load_dataset(str(dataset_dir))
+    ctx = CheckContext(dataset="synthetic", revision=ds.revision, fps=ds.fps, info=ds.info)
+    results = run_checks(connect(ds), ctx, ALL_CHECKS, shard="all")
+    path = tmp_path / "report" / "labels.jsonl"
+    return TestClient(create_app(ds, results, labels_path=path)), path
+
+
+def test_labels_are_appended_and_the_latest_one_is_shown(labelling):
+    client, path = labelling
+    issue = {"episode_index": 3, "check_name": "frame_index", "frame_start": 20, "frame_end": 21}
+    assert client.get("/api/meta").json()["labels_enabled"] is True
+    assert client.get("/api/episodes/3").json()["issues"][0]["label"] is None
+
+    assert client.post("/api/labels", json={**issue, "label": "real"}).status_code == 200
+    assert client.post("/api/labels", json={**issue, "label": "false_positive"}).status_code == 200
+
+    assert client.get("/api/episodes/3").json()["issues"][0]["label"] == "false_positive"
+    lines = [json.loads(x) for x in path.read_text().splitlines()]
+    assert [x["label"] for x in lines] == ["real", "false_positive"]  # full history kept
+    assert {"dataset_revision", "labelled_at"} <= set(lines[0])
+
+
+def test_invalid_labels_are_rejected_and_labelling_can_be_disabled(labelling, client):
+    labelled, _ = labelling
+    bad = {"episode_index": 3, "check_name": "frame_index", "label": "maybe"}
+    assert labelled.post("/api/labels", json=bad).status_code == 422
+    ok = {**bad, "label": "real"}
+    assert client.post("/api/labels", json=ok).status_code == 409
+    assert client.get("/api/meta").json()["labels_enabled"] is False
+
+
+def test_labels_from_another_revision_are_ignored(tmp_path):
+    from robot_data_check.viewer.labels import LabelStore
+
+    path = tmp_path / "labels.jsonl"
+    LabelStore(path, "d", "rev1").add(1, "frame_index", 5, 5, "real")
+    assert LabelStore(path, "d", "rev2").latest() == {}
+    assert LabelStore(path, "d", "rev1").latest() == {(1, "frame_index", 5, 5): "real"}
