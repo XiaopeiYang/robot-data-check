@@ -22,11 +22,12 @@ The first real findings are conversion-related (see [findings/droid_1.0.1.md](fi
 which makes conversion integrity the natural entry point. But by count, the Hub is
 dominated by directly recorded community datasets:
 
-- **79,933** datasets carry the `LeRobot` tag (2026-10-11, unfiltered: includes test
-  uploads and tiny practice datasets).
-- Random sample of 60, 59 readable: **46 are `v3.0`, about 78% (95% CI ≈ 66–87%, Wilson)**,
-  13 are `v2.1`. The most common `robot_type`s are `so_follower` (21) and
-  `so101_follower` (10).
+- **80,885** datasets carry the `LeRobot` tag (2026-10-15, unfiltered: includes test
+  uploads and empty datasets).
+- Random sample of 500 ([research/hub_census.md](research/hub_census.md)): of the 490
+  readable, **69.6% are `v3.0` (95% CI 65.4–73.5%)**, 27.8% `v2.1`, 2.7% `v2.0`. SO arms
+  dominate `robot_type` (`so_follower`, `so101_follower`, `so100`, ...). Median size is
+  10 episodes; 9.4% have none.
 
 Converted datasets are few but large and influential; recorded ones are many and small.
 Covering both is what makes a Hub-wide scan meaningful.
@@ -95,7 +96,7 @@ Every scan report states how many datasets were excluded and why.
 |---|---|
 | **Code ownership**: checks implemented by agents | The user writes each spec, rules on every test/implementation disagreement and answers explain-back questions; tests and implementation come from isolated agents, checked by SQL mutation testing ([CLAUDE.md](../CLAUDE.md), [code-tour.md](code-tour.md)) |
 | Overclaiming a finding | `verify-finding` skill; four statuses; source data checked before upstream issues |
-| `v2.1` datasets (≈22% of the sample) unsupported | Phase 2 either adds `v2.1` support or reports "v3 only" explicitly |
+| `v2.x` datasets (≈30% of readable ones) unsupported | Phase 2 either adds `v2.1` support or reports "v3 only" explicitly |
 | Hub rate limits | `HF_TOKEN` for scans; metadata-first downloads keep requests small |
 | Scope creep (four interface layers) | Each stage must reach its "done when" before the next starts |
 | Arbitrary quality score | Calibrate against human review in the viewer; never equate task failure with bad data |

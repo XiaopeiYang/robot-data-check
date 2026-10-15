@@ -288,7 +288,7 @@ Full version with completion criteria and risks: [docs/vision.md](docs/vision.md
 
 ## Limitations
 
-- Only LeRobot `v3.0` datasets are supported. In a random sample of 60 Hub datasets tagged `LeRobot` (59 readable), 46 were `v3.0`: about 78% (95% CI ≈ 66–87%); the rest were `v2.1`.
+- Only LeRobot `v3.0` datasets are supported. In a random sample of 500 Hub datasets tagged `LeRobot`, 69.6% of the readable ones were `v3.0` (95% CI 65.4–73.5%); the rest were `v2.1` / `v2.0` ([census](docs/research/hub_census.md)).
 - LeRobot stores `timestamp = frame_index / fps` for every dataset, so recording stalls are invisible in timestamps; they can only be inferred from indirect signals such as frozen camera frames ([details](docs/findings/lerobot_format.md)).
 - The viewer streams AV1 video (LeRobot's default); Safari plays AV1 only on recent hardware.
 - Anomaly thresholds are derived per dataset but have so far been validated on a small number of datasets.
