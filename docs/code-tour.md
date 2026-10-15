@@ -64,6 +64,14 @@
 - 第一次运行的结果：`frame_index` 杀死 14/16，存活的 2 个都是重复帧范围的 `min` 和 `max` 互换。原因是测试只重复了一帧，起止相同。这是一个真实的测试缺口
 - **练习**：为什么一个变异体"让 SQL 报错"不算测试强？工具是怎么区分这种情况的？
 
+## 11. `engine/video.py`、调研脚本和浏览器测试
+- `video.py`：按 `episodes` 视图里的 from/to 时间戳解码一集的画面，产出 `(frame_index, 灰度图)`
+  - PyAV 自带的 FFmpeg 不支持 HTTPS，所以 Hub 上的视频由 Python 里的 `RangeFile` 用 HTTP range 请求去读，带块缓存
+  - PyAV 会关闭传给它的文件对象，所以复用同一个 `RangeFile` 时要套一层 `_KeepOpen`，并先把读取位置归零
+- `tools/research/`：Hub 普查和冻结帧调研。都分成 `collect`（联网采集，结果存进 `docs/research/`）和 `report`（只读已提交的数据）两步，文档里的数字都能离线复现
+- `tests/e2e/`：浏览器端到端测试，默认跳过；设置 `ROBOCHECK_E2E=1` 才运行，准备方法见 `docs/dev-setup.md`
+- **练习**：冻结帧调研为什么用"逐像素完全相同"作为信号，而不是"差异小于某个阈值"？（提示：DROID 外部相机的数据）
+
 ## 面试最可能被追问的 5 个问题
 1. 为什么用 DuckDB，而不是 pandas 或 Spark？（第 3、4 节；README 的 Design decisions）
 2. 怎么证明你的检查是对的？（第 6 节：故障注入、检出率和误报率）

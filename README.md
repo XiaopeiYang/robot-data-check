@@ -116,7 +116,9 @@ Every check writes rows with the same schema. Downstream consumers (reports, age
 
 ## Episode viewer
 
-<!-- TODO: add a screenshot / GIF -->
+![Episode viewer on DROID episode 30](docs/img/viewer.png)
+
+*Real data: `lerobot/droid_1.0.1` episode 30, three cameras in sync with action / state plots. No issues are flagged because only the `frame_index` check exists so far.*
 
 `robocheck view` starts a local web page over the same engine and results table:
 
