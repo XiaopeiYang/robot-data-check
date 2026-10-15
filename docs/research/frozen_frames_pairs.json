@@ -1,0 +1,1805 @@
+{
+ "samples": [
+  {
+   "repo": "lerobot/droid_1.0.1",
+   "revision": "0eabc778f959c54b8c5aa3626cc1128d2d2e54d4",
+   "range": [
+    0,
+    1000
+   ],
+   "n": 50
+  },
+  {
+   "repo": "lerobot/svla_so100_sorting",
+   "revision": "13870ca969084d8ce4d8a0391b06cead78e804ba",
+   "range": [
+    0,
+    52
+   ],
+   "n": 52
+  }
+ ],
+ "seed": 0,
+ "stride": 4,
+ "collected_at": "2026-10-15T19:36:43+00:00",
+ "costs": [
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 41,
+   "seconds": 2.401274598999862,
+   "frames": 77
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 75,
+   "seconds": 3.3395670700001574,
+   "frames": 375
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 97,
+   "seconds": 2.6298643929999344,
+   "frames": 352
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 101,
+   "seconds": 3.207489929000076,
+   "frames": 380
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 103,
+   "seconds": 3.326773140000114,
+   "frames": 294
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 142,
+   "seconds": 2.8833241649999763,
+   "frames": 195
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 143,
+   "seconds": 4.5231607719997555,
+   "frames": 989
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 150,
+   "seconds": 2.486738757999774,
+   "frames": 131
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 223,
+   "seconds": 4.277592936000019,
+   "frames": 792
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 256,
+   "seconds": 4.910455924999951,
+   "frames": 1041
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 265,
+   "seconds": 2.2653920819998348,
+   "frames": 130
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 288,
+   "seconds": 2.953954144999898,
+   "frames": 225
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 310,
+   "seconds": 2.858812253999986,
+   "frames": 182
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 317,
+   "seconds": 4.746534243000042,
+   "frames": 518
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 338,
+   "seconds": 2.794618530999742,
+   "frames": 361
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 362,
+   "seconds": 2.8397186140000485,
+   "frames": 241
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 366,
+   "seconds": 2.8219736710002508,
+   "frames": 210
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 394,
+   "seconds": 3.756884262999847,
+   "frames": 417
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 414,
+   "seconds": 3.620451323999987,
+   "frames": 495
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 430,
+   "seconds": 2.852938954000365,
+   "frames": 256
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 483,
+   "seconds": 3.6198093779999,
+   "frames": 986
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 488,
+   "seconds": 2.9521579699999165,
+   "frames": 416
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 497,
+   "seconds": 3.5967916069998864,
+   "frames": 743
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 516,
+   "seconds": 3.4423213669997494,
+   "frames": 172
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 523,
+   "seconds": 3.8196200439997483,
+   "frames": 198
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 545,
+   "seconds": 5.809842172000117,
+   "frames": 491
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 573,
+   "seconds": 3.2455796650001503,
+   "frames": 140
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 597,
+   "seconds": 4.792554349000056,
+   "frames": 738
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 616,
+   "seconds": 3.2751808420002817,
+   "frames": 224
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 633,
+   "seconds": 3.9703700189998017,
+   "frames": 94
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 700,
+   "seconds": 4.1706709639997825,
+   "frames": 297
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 722,
+   "seconds": 3.572245264999765,
+   "frames": 146
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 747,
+   "seconds": 3.9426260360000924,
+   "frames": 124
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 773,
+   "seconds": 4.0724022029999105,
+   "frames": 287
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 776,
+   "seconds": 3.8098516809996,
+   "frames": 502
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 802,
+   "seconds": 3.051965938000194,
+   "frames": 153
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 818,
+   "seconds": 4.3971893160000945,
+   "frames": 779
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 829,
+   "seconds": 3.3444536369997877,
+   "frames": 174
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 849,
+   "seconds": 3.7155051950003326,
+   "frames": 235
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 864,
+   "seconds": 3.073091177000151,
+   "frames": 298
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 870,
+   "seconds": 3.1890501679999943,
+   "frames": 119
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 911,
+   "seconds": 3.676054749999821,
+   "frames": 226
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 913,
+   "seconds": 5.037983412999893,
+   "frames": 361
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 920,
+   "seconds": 3.6804200669998863,
+   "frames": 217
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 923,
+   "seconds": 3.7139507689998936,
+   "frames": 227
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 929,
+   "seconds": 3.1937725859997954,
+   "frames": 149
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 931,
+   "seconds": 3.674233806000302,
+   "frames": 233
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 940,
+   "seconds": 3.9560710759997164,
+   "frames": 183
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 988,
+   "seconds": 3.8256249140004,
+   "frames": 131
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.wrist_left",
+   "episode_index": 991,
+   "seconds": 4.016714643999876,
+   "frames": 108
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 41,
+   "seconds": 3.054070096000032,
+   "frames": 77
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 75,
+   "seconds": 4.4088174879998405,
+   "frames": 375
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 97,
+   "seconds": 2.53525598799979,
+   "frames": 352
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 101,
+   "seconds": 3.681252719999975,
+   "frames": 380
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 103,
+   "seconds": 3.0927354740001647,
+   "frames": 294
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 142,
+   "seconds": 2.98755042699986,
+   "frames": 195
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 143,
+   "seconds": 6.12547712200012,
+   "frames": 989
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 150,
+   "seconds": 3.0675434030004,
+   "frames": 131
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 223,
+   "seconds": 4.9920506109997405,
+   "frames": 792
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 256,
+   "seconds": 6.094959596000081,
+   "frames": 1041
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 265,
+   "seconds": 2.247708749999674,
+   "frames": 130
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 288,
+   "seconds": 2.8663984270001492,
+   "frames": 225
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 310,
+   "seconds": 2.2523858509998718,
+   "frames": 182
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 317,
+   "seconds": 3.4666518240001096,
+   "frames": 518
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 338,
+   "seconds": 3.144703253999978,
+   "frames": 361
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 362,
+   "seconds": 2.928859683000155,
+   "frames": 241
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 366,
+   "seconds": 2.9642552390000674,
+   "frames": 210
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 394,
+   "seconds": 3.6781995799997276,
+   "frames": 417
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 414,
+   "seconds": 3.724947365999924,
+   "frames": 495
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 430,
+   "seconds": 3.077931241999977,
+   "frames": 256
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 483,
+   "seconds": 5.471557307999774,
+   "frames": 986
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 488,
+   "seconds": 3.4263785090001875,
+   "frames": 416
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 497,
+   "seconds": 5.6962141929998324,
+   "frames": 743
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 516,
+   "seconds": 3.0150075040000957,
+   "frames": 172
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 523,
+   "seconds": 2.871010153000043,
+   "frames": 198
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 545,
+   "seconds": 3.121007279999958,
+   "frames": 491
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 573,
+   "seconds": 2.259335618000023,
+   "frames": 140
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 597,
+   "seconds": 5.598446291000073,
+   "frames": 738
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 616,
+   "seconds": 2.944793421999748,
+   "frames": 224
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 633,
+   "seconds": 2.887328595999861,
+   "frames": 94
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 700,
+   "seconds": 3.5385554489998867,
+   "frames": 297
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 722,
+   "seconds": 2.862250220000078,
+   "frames": 146
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 747,
+   "seconds": 2.8650699549998535,
+   "frames": 124
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 773,
+   "seconds": 4.797798235999835,
+   "frames": 287
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 776,
+   "seconds": 4.687695060999886,
+   "frames": 502
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 802,
+   "seconds": 4.271685408999929,
+   "frames": 153
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 818,
+   "seconds": 5.21687037699985,
+   "frames": 779
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 829,
+   "seconds": 2.6745746990000043,
+   "frames": 174
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 849,
+   "seconds": 2.8176251720001346,
+   "frames": 235
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 864,
+   "seconds": 2.805334128999675,
+   "frames": 298
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 870,
+   "seconds": 2.674782882999807,
+   "frames": 119
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 911,
+   "seconds": 2.8188940270001694,
+   "frames": 226
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 913,
+   "seconds": 4.007347168000251,
+   "frames": 361
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 920,
+   "seconds": 2.893265711999902,
+   "frames": 217
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 923,
+   "seconds": 3.435294929000065,
+   "frames": 227
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 929,
+   "seconds": 2.1289896890002638,
+   "frames": 149
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 931,
+   "seconds": 3.7187548609999794,
+   "frames": 233
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 940,
+   "seconds": 3.1930738660003044,
+   "frames": 183
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 988,
+   "seconds": 2.88973524200037,
+   "frames": 131
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_1_left",
+   "episode_index": 991,
+   "seconds": 2.834766411000146,
+   "frames": 108
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 41,
+   "seconds": 3.056008060000295,
+   "frames": 77
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 75,
+   "seconds": 3.8556065650000164,
+   "frames": 375
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 97,
+   "seconds": 3.451576943999953,
+   "frames": 352
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 101,
+   "seconds": 3.822083842000211,
+   "frames": 380
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 103,
+   "seconds": 2.9640434889997778,
+   "frames": 294
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 142,
+   "seconds": 3.084345261999715,
+   "frames": 195
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 143,
+   "seconds": 6.195446730000185,
+   "frames": 989
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 150,
+   "seconds": 2.485388690000036,
+   "frames": 131
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 223,
+   "seconds": 4.889597250999941,
+   "frames": 792
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 256,
+   "seconds": 7.703910818000168,
+   "frames": 1041
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 265,
+   "seconds": 2.772454689999904,
+   "frames": 130
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 288,
+   "seconds": 3.392508739999812,
+   "frames": 225
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 310,
+   "seconds": 3.2796938440001213,
+   "frames": 182
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 317,
+   "seconds": 4.644397522999952,
+   "frames": 518
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 338,
+   "seconds": 4.0308188080002765,
+   "frames": 361
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 362,
+   "seconds": 3.708022755999991,
+   "frames": 241
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 366,
+   "seconds": 3.311436622000201,
+   "frames": 210
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 394,
+   "seconds": 3.4083088259999386,
+   "frames": 417
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 414,
+   "seconds": 4.790098819000377,
+   "frames": 495
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 430,
+   "seconds": 3.272782840999753,
+   "frames": 256
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 483,
+   "seconds": 5.39625554200029,
+   "frames": 986
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 488,
+   "seconds": 3.217028978000144,
+   "frames": 416
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 497,
+   "seconds": 7.4253792750000684,
+   "frames": 743
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 516,
+   "seconds": 3.2241172159997404,
+   "frames": 172
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 523,
+   "seconds": 3.1240977899997233,
+   "frames": 198
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 545,
+   "seconds": 3.957818523000242,
+   "frames": 491
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 573,
+   "seconds": 3.563880107999921,
+   "frames": 140
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 597,
+   "seconds": 7.5299124369998935,
+   "frames": 738
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 616,
+   "seconds": 2.927473281999937,
+   "frames": 224
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 633,
+   "seconds": 3.1772019160002856,
+   "frames": 94
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 700,
+   "seconds": 4.058044500000051,
+   "frames": 297
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 722,
+   "seconds": 3.3108211930002653,
+   "frames": 146
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 747,
+   "seconds": 3.4460824259999754,
+   "frames": 124
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 773,
+   "seconds": 3.8695988129998113,
+   "frames": 287
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 776,
+   "seconds": 4.221101426000132,
+   "frames": 502
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 802,
+   "seconds": 3.3754024260001643,
+   "frames": 153
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 818,
+   "seconds": 5.888076335000278,
+   "frames": 779
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 829,
+   "seconds": 3.560040771000331,
+   "frames": 174
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 849,
+   "seconds": 4.005896738000047,
+   "frames": 235
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 864,
+   "seconds": 3.3873017509999954,
+   "frames": 298
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 870,
+   "seconds": 2.372831629999837,
+   "frames": 119
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 911,
+   "seconds": 3.12153454700001,
+   "frames": 226
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 913,
+   "seconds": 3.9317179179997765,
+   "frames": 361
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 920,
+   "seconds": 3.7074245200001315,
+   "frames": 217
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 923,
+   "seconds": 3.149213830000008,
+   "frames": 227
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 929,
+   "seconds": 2.940261282999927,
+   "frames": 149
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 931,
+   "seconds": 3.0402510740000253,
+   "frames": 233
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 940,
+   "seconds": 3.671674320999955,
+   "frames": 183
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 988,
+   "seconds": 3.4089559730000474,
+   "frames": 131
+  },
+  {
+   "dataset": "lerobot/droid_1.0.1",
+   "camera": "observation.images.exterior_2_left",
+   "episode_index": 991,
+   "seconds": 3.0341648900002838,
+   "frames": 108
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 0,
+   "seconds": 12.10736368400012,
+   "frames": 962
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 1,
+   "seconds": 10.810555377999663,
+   "frames": 796
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 2,
+   "seconds": 12.17692464899983,
+   "frames": 768
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 3,
+   "seconds": 11.701229137000155,
+   "frames": 735
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 4,
+   "seconds": 11.19840964399964,
+   "frames": 722
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 5,
+   "seconds": 10.09375380099982,
+   "frames": 775
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 6,
+   "seconds": 9.803991660000065,
+   "frames": 756
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 7,
+   "seconds": 11.493458700000247,
+   "frames": 780
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 8,
+   "seconds": 5.341995685999791,
+   "frames": 339
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 9,
+   "seconds": 9.09982359200012,
+   "frames": 646
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 10,
+   "seconds": 11.01968960999966,
+   "frames": 783
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 11,
+   "seconds": 10.461396760999833,
+   "frames": 827
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 12,
+   "seconds": 10.565466354999899,
+   "frames": 681
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 13,
+   "seconds": 12.007562185000097,
+   "frames": 721
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 14,
+   "seconds": 10.560841675999654,
+   "frames": 702
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 15,
+   "seconds": 11.340570811999896,
+   "frames": 785
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 16,
+   "seconds": 12.627188752000166,
+   "frames": 734
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 17,
+   "seconds": 11.131508179999855,
+   "frames": 690
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 18,
+   "seconds": 11.192034874,
+   "frames": 711
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 19,
+   "seconds": 11.416985436000232,
+   "frames": 757
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 20,
+   "seconds": 12.168184557000131,
+   "frames": 750
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 21,
+   "seconds": 12.806345714000145,
+   "frames": 852
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 22,
+   "seconds": 12.0049627960002,
+   "frames": 744
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 23,
+   "seconds": 3.1119646940001076,
+   "frames": 51
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 24,
+   "seconds": 11.09315530699996,
+   "frames": 691
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 25,
+   "seconds": 10.813187139000092,
+   "frames": 725
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 26,
+   "seconds": 12.155365318999884,
+   "frames": 696
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 27,
+   "seconds": 9.844952081999963,
+   "frames": 676
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 28,
+   "seconds": 11.769634399999632,
+   "frames": 711
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 29,
+   "seconds": 10.804813098000068,
+   "frames": 763
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 30,
+   "seconds": 12.155340522999722,
+   "frames": 782
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 31,
+   "seconds": 10.65084604399999,
+   "frames": 677
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 32,
+   "seconds": 9.278036481000072,
+   "frames": 668
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 33,
+   "seconds": 9.266784773999916,
+   "frames": 632
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 34,
+   "seconds": 7.896157289000257,
+   "frames": 536
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 35,
+   "seconds": 9.751375700000153,
+   "frames": 606
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 36,
+   "seconds": 9.543489187999967,
+   "frames": 620
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 37,
+   "seconds": 10.988933249000183,
+   "frames": 745
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 38,
+   "seconds": 8.296260539000286,
+   "frames": 655
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 39,
+   "seconds": 9.042767592000018,
+   "frames": 639
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 40,
+   "seconds": 8.959996198999761,
+   "frames": 618
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 41,
+   "seconds": 9.281869454000116,
+   "frames": 611
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 42,
+   "seconds": 9.544858235999982,
+   "frames": 698
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 43,
+   "seconds": 9.732754904000103,
+   "frames": 626
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 44,
+   "seconds": 9.900947358000394,
+   "frames": 685
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 45,
+   "seconds": 10.559059476999664,
+   "frames": 672
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 46,
+   "seconds": 9.221430044000044,
+   "frames": 690
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 47,
+   "seconds": 8.469574994999675,
+   "frames": 633
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 48,
+   "seconds": 7.7623540839999805,
+   "frames": 608
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 49,
+   "seconds": 10.077315553999597,
+   "frames": 671
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 50,
+   "seconds": 10.479335750000246,
+   "frames": 679
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.top",
+   "episode_index": 51,
+   "seconds": 10.142452748000323,
+   "frames": 633
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 0,
+   "seconds": 6.8925974950002455,
+   "frames": 962
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 1,
+   "seconds": 6.475025444000039,
+   "frames": 796
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 2,
+   "seconds": 6.274741841999912,
+   "frames": 768
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 3,
+   "seconds": 6.277130266999848,
+   "frames": 735
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 4,
+   "seconds": 5.541083344999606,
+   "frames": 722
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 5,
+   "seconds": 5.6186262389996955,
+   "frames": 775
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 6,
+   "seconds": 5.797402911000063,
+   "frames": 756
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 7,
+   "seconds": 5.479945149999821,
+   "frames": 780
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 8,
+   "seconds": 6.098139551999793,
+   "frames": 339
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 9,
+   "seconds": 4.93778205200033,
+   "frames": 646
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 10,
+   "seconds": 6.465631135999956,
+   "frames": 783
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 11,
+   "seconds": 6.07121650199997,
+   "frames": 827
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 12,
+   "seconds": 6.21529056899999,
+   "frames": 681
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 13,
+   "seconds": 5.900496941999791,
+   "frames": 721
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 14,
+   "seconds": 6.386297465000098,
+   "frames": 702
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 15,
+   "seconds": 5.99654968699997,
+   "frames": 785
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 16,
+   "seconds": 6.55220524599963,
+   "frames": 734
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 17,
+   "seconds": 5.801623584000026,
+   "frames": 690
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 18,
+   "seconds": 5.072779998999977,
+   "frames": 711
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 19,
+   "seconds": 5.70400480599983,
+   "frames": 757
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 20,
+   "seconds": 6.75309500900039,
+   "frames": 750
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 21,
+   "seconds": 7.016147733000253,
+   "frames": 852
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 22,
+   "seconds": 5.884388083999966,
+   "frames": 744
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 23,
+   "seconds": 3.024750187000336,
+   "frames": 51
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 24,
+   "seconds": 5.707484129000022,
+   "frames": 691
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 25,
+   "seconds": 5.378296448000128,
+   "frames": 725
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 26,
+   "seconds": 6.070733804000156,
+   "frames": 696
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 27,
+   "seconds": 5.1559863910001695,
+   "frames": 676
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 28,
+   "seconds": 5.54293883299988,
+   "frames": 711
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 29,
+   "seconds": 5.742537672000253,
+   "frames": 763
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 30,
+   "seconds": 6.234924767999928,
+   "frames": 782
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 31,
+   "seconds": 5.207220733000213,
+   "frames": 677
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 32,
+   "seconds": 5.027601892999883,
+   "frames": 668
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 33,
+   "seconds": 5.310937405000004,
+   "frames": 632
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 34,
+   "seconds": 4.8978883460004,
+   "frames": 536
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 35,
+   "seconds": 5.16691119699999,
+   "frames": 606
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 36,
+   "seconds": 5.426684728000055,
+   "frames": 620
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 37,
+   "seconds": 5.171250914999746,
+   "frames": 745
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 38,
+   "seconds": 5.612936545000139,
+   "frames": 655
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 39,
+   "seconds": 5.329236177999974,
+   "frames": 639
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 40,
+   "seconds": 5.037623852000252,
+   "frames": 618
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 41,
+   "seconds": 5.332811876999585,
+   "frames": 611
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 42,
+   "seconds": 5.606078316000094,
+   "frames": 698
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 43,
+   "seconds": 6.397971890000008,
+   "frames": 626
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 44,
+   "seconds": 5.986361364000004,
+   "frames": 685
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 45,
+   "seconds": 6.17614230900017,
+   "frames": 672
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 46,
+   "seconds": 5.343770120000045,
+   "frames": 690
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 47,
+   "seconds": 5.903140773000359,
+   "frames": 633
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 48,
+   "seconds": 5.007781398000134,
+   "frames": 608
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 49,
+   "seconds": 5.118730625999888,
+   "frames": 671
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 50,
+   "seconds": 5.630567910000082,
+   "frames": 679
+  },
+  {
+   "dataset": "lerobot/svla_so100_sorting",
+   "camera": "observation.images.wrist",
+   "episode_index": 51,
+   "seconds": 4.883409752999796,
+   "frames": 633
+  }
+ ]
+}
