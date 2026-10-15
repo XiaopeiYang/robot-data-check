@@ -268,7 +268,7 @@ Full version with completion criteria and risks: [docs/vision.md](docs/vision.md
 
 **M1 wrap-up — checks with real findings**
 - [ ] `episode_bounds` → `metadata` → `idle_segments` → `action_jumps` → `stats`
-- [ ] Add one dataset recorded directly with LeRobot (SO-100/101) for the timing checks
+- [ ] Run the checks on a second dataset, `lerobot/svla_so100_sorting` (SO-100), for behaviour checks
 - [ ] Verify DROID findings against the original RLDS data ([findings](docs/findings/droid_1.0.1.md))
 - [ ] Results on DROID + write-up, quality score
 
@@ -289,7 +289,7 @@ Full version with completion criteria and risks: [docs/vision.md](docs/vision.md
 ## Limitations
 
 - Only LeRobot `v3.0` datasets are supported. In a random sample of 60 Hub datasets tagged `LeRobot` (59 readable), 46 were `v3.0`: about 78% (95% CI ≈ 66–87%); the rest were `v2.1`.
-- Timing checks need real recording timestamps; datasets converted from other formats (e.g. DROID) often have synthesised ones.
+- LeRobot stores `timestamp = frame_index / fps` for every dataset, so recording stalls are invisible in timestamps; they can only be inferred from indirect signals such as frozen camera frames ([details](docs/findings/lerobot_format.md)).
 - The viewer streams AV1 video (LeRobot's default); Safari plays AV1 only on recent hardware.
 - Anomaly thresholds are derived per dataset but have so far been validated on a small number of datasets.
 - Visual checks are not yet implemented; problems that only show up in video (frozen or black frames) are not detected.

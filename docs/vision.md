@@ -13,7 +13,7 @@ Checks fall into three families, because problems come from different places:
 | Family | Typical source | Examples | Where it shows up |
 |---|---|---|---|
 | Conversion integrity | Porting from another format (RLDS, ...) | duplicated / mis-mapped metadata columns, label consistency | large converted datasets such as DROID |
-| Recording integrity | Recording hardware and software | dropped frames, timing jitter, frame-index gaps | datasets recorded directly with LeRobot |
+| Recording integrity | Recording hardware and software | frozen / repeated camera frames, state jumps too large for one frame, frame-index gaps | datasets recorded directly with LeRobot |
 | Behaviour anomalies | The demonstration itself | idle stretches, action jumps | both |
 
 ### Why not only converted datasets
@@ -31,16 +31,34 @@ dominated by directly recorded community datasets:
 Converted datasets are few but large and influential; recorded ones are many and small.
 Covering both is what makes a Hub-wide scan meaningful.
 
-Also measured: DROID's timestamps are synthesised during conversion (max deviation from
-`frame_index / fps` is 3.6e-6 over 300k frames), so timing checks can only prove their
-value on a directly recorded dataset.
+### Recording problems do not show up in timestamps
+
+LeRobot's writer always stores `timestamp = frame_index / fps`, for converted and directly
+recorded datasets alike (8 datasets measured, code located; see
+[findings/lerobot_format.md](findings/lerobot_format.md)). A stalled control loop or a late
+camera frame is invisible in the tabular data. Recording integrity therefore has to be
+inferred from indirect signals:
+
+- **frozen or repeated camera frames**: the image does not change while the robot state
+  does; needs video decoding (feasibility: [research/frozen_frames.md](research/frozen_frames.md))
+- **state jumps** larger than the robot can move in one `1 / fps` step (overlaps with
+  `action_jumps`)
+
+What to do with the planned timestamp check is an open decision (keep it as a cheap
+consistency check for non-standard writers, or fold it into `frame_index`).
+
+### Second dataset
+
+`lerobot/svla_so100_sorting` (official, SO-100, 52 episodes; notes in
+[svla_so100_sorting_layout.md](svla_so100_sorting_layout.md)). It gives the behaviour checks a
+different robot, task and recording setup than DROID; it cannot help timing checks.
 
 ## Roadmap
 
 | Stage | Content | Done when |
 |---|---|---|
 | **Now** | GitHub remote, CI running, browser end-to-end test script in the repo | CI is green |
-| **M1 wrap-up** | User writes a spec per check, agents build it ([check-workflow](../.claude/skills/check-workflow/SKILL.md)), in order: `episode_bounds` → `metadata` (duplicated columns, empty / constant fields, very short episodes) → `idle_segments` → `action_jumps` → `stats`. Add one SO-100/101 dataset. Verify DROID findings against the original RLDS data. | README Results and Key finding filled with real numbers |
+| **M1 wrap-up** | User writes a spec per check, agents build it ([check-workflow](../.claude/skills/check-workflow/SKILL.md)), in order: `episode_bounds` → `metadata` (duplicated columns, empty / constant fields, very short episodes) → `idle_segments` → `action_jumps` → `stats`. Run the checks on `lerobot/svla_so100_sorting` as well. Find the source the LeRobot DROID port actually used and verify the DROID findings against it. | README Results and Key finding filled with real numbers |
 | **Outreach** | Upstream issue for confirmed defects; first technical blog post | A public issue link |
 | **Phase 2: scan the Hub** | Define inclusion criteria first; then incremental, idempotent scans keyed by dataset commit sha; Dagster orchestration; cloud | Can say "scanned N datasets (after filtering M), found these categories of problems" |
 | **Phase 3: agent interface** | MCP server + agent eval, querying results across all scanned datasets | Agent eval has real accuracy numbers |
@@ -63,6 +81,11 @@ define and document criteria, for example:
 - `meta/info.json` parses; `codebase_version` is supported
 - at least N episodes and M frames (N, M chosen from the observed distribution)
 - not an obvious test upload (to be defined from data, not guessed)
+
+Example of why: `SO-101-robot-learning/so101_pick_place` had 7.6k downloads but
+`total_episodes = 0` (2026-10-14). The census in
+[research/hub_census.md](research/hub_census.md) gives the distribution these thresholds
+should come from.
 
 Every scan report states how many datasets were excluded and why.
 
